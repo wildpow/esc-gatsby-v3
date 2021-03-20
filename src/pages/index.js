@@ -1,14 +1,22 @@
 import * as React from "react"
 import { Link } from "gatsby"
+import { styled } from "goober"
 import { StaticImage } from "gatsby-plugin-image"
-
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+const Button = styled("button")`
+  margin: 0;
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  background-color: green;
+  font-family: "Roboto";
+`
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
     <h1>Hi people</h1>
+    <Button>Button</Button>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
     <StaticImage
