@@ -9,9 +9,25 @@ import * as React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import { GlobalStyles } from "twin.macro"
+import { createGlobalStyles } from "goober/global"
+
 import Header from "./header"
 import "./layout.css"
+const GooberGlobalStyles = createGlobalStyles`
+.headroom {
+  z-index: 2 !important;
+}
 
+body {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+  @media print {
+    #bf-revz-widget-1484606125{
+      display: none !important;
+    }
+  }
+`
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -26,6 +42,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <GlobalStyles />
+      <GooberGlobalStyles />
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div
         style={{
