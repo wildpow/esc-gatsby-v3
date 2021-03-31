@@ -9,6 +9,7 @@ const cfg = {
   },
   plugins: [
     `gatsby-plugin-goober`,
+    `gatsby-plugin-remove-serviceworker`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     "gatsby-plugin-webpack-bundle-analyser-v2",
@@ -34,9 +35,6 @@ const cfg = {
       },
     },
     `gatsby-plugin-gatsby-cloud`,
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 }
 if (process.env.NODE_ENV === "production") {
