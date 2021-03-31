@@ -29,8 +29,7 @@ const HeaderRoot = styled(`header`)`
   flex-direction: column;
   box-shadow: ${theme`boxShadow.lg`};
   background-color: ${theme`colors.gray.200`};
-  pointer-events: ${({ cartStatus, menuStatus }) =>
-    cartStatus === "open" || menuStatus === "open" ? "none" : "auto"};
+  pointer-events: ${({ moved }) => (moved ? "none" : "auto")};
   .header__Wrapper {
     display: flex;
     flex-direction: column-reverse;
@@ -56,16 +55,14 @@ const HeaderRoot = styled(`header`)`
   .brand__anchor {
     width: 60px;
     position: relative;
-    /* pointer-events: ${({ cartStatus, menuStatus }) =>
-      cartStatus === "open" || menuStatus === "open" ? "none" : "auto"}; */
     display: block;
     flex-shrink: 0;
     line-height: 1;
     transition: all 0.2s ease;
-    :hover {
+    &:hover {
       transform: scale(1.1);
     }
-    :focus {
+    &:focus {
       box-shadow: 0 0 0 1px ${theme`colors.blue.300`};
       outline: 0;
       transition: box-shadow 0.15s ease-in-out;
@@ -79,20 +76,20 @@ const HeaderRoot = styled(`header`)`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: Roboto, sans-serif;
-    color: ${theme`colors.red.800`};
+    color: ${theme`colors.red.900`};
     font-weight: 900;
     font-size: ${theme`fontSize.2xl`};
     line-height: 1;
     padding-left: ${theme`spacing.2`};
     span {
-      color: ${theme`colors.blue.800`};
+      color: ${theme`colors.blue.900`};
       font-style: italic;
     }
   }
 
   @media (min-width: ${theme`screens.sm`}) {
     transform: ${({ moved }) =>
-      moved ? "translate3d(0vw, 0, 0)" : "translate3d(-400px, 0, 0)"};
+      moved ? "translate3d(-400px, 0, 0)" : "translate3d(0vw, 0, 0)"};
   }
   @media screen and (min-width: 835px) {
     box-shadow: ${theme`boxShadow.md`};
@@ -158,13 +155,8 @@ const Header = ({
   const { width } = useWindowSize()
   const { pandaLogo } = useLogo()
   return (
-    <HeaderRoot
-      cartStatus={cartStatus}
-      menuStatus={menuStatus}
-      className={moved}
-      role="banner"
-    >
-      {menuStatus === "open" || cartStatus === "open" ? <MenuOverLay /> : null}
+    <HeaderRoot moved={moved} role="banner">
+      {moved ? <MenuOverLay /> : null}
       <div className="header__Wrapper">
         <div className="header__flex">
           <Link className="brand__anchor" to="/" title="Back to home page">
@@ -185,7 +177,6 @@ const Header = ({
             </h1>
           </Link>
         </div>
-        {/* {width > 768 ? <ExtraNavIcons /> : null} */}
         <NavIcons
           pin={pin}
           cartToggle={cartToggle}
@@ -199,22 +190,20 @@ const Header = ({
           <div>(425) 512.0017</div>
         </PrintOnlyContact>
       </div>
-      {/* (425) 512.0017 */}
-      {width >= 1024 ? <Nav cartStatus={cartStatus} /> : null}
-      {/* {width < 768 ? <ExtraNavIcons /> : null} */}
+      <Nav cartStatus={cartStatus} />
     </HeaderRoot>
   )
 }
 Header.defaultProps = {
-  cartStatus: "closed",
-  menuStatus: "closed",
-  moved: "",
+  cartStatus: false,
+  menuStatus: false,
+  moved: false,
   pin: true,
 }
 Header.propTypes = {
-  cartStatus: string,
-  menuStatus: string,
-  moved: string,
+  cartStatus: bool,
+  menuStatus: bool,
+  moved: bool,
   pin: bool,
   cartToggle: func.isRequired,
 }
