@@ -1,4 +1,4 @@
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby"
 
 const useLogo = () => {
   const { datoCmsFrontPage } = useStaticQuery(
@@ -7,19 +7,14 @@ const useLogo = () => {
         datoCmsFrontPage {
           pandaLogo {
             alt
-            fluid(
-              maxWidth: 180
-              maxHeight: 110
-              imgixParams: { auto: "compress" }
-            ) {
-              ...GatsbyDatoCmsFluid
-            }
+
+            gatsbyImageData(layout: CONSTRAINED)
           }
         }
       }
-    `,
-  );
-  return datoCmsFrontPage;
-};
+    `
+  )
+  return datoCmsFrontPage
+}
 
-export default useLogo;
+export default useLogo

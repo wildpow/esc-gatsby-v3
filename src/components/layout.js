@@ -9,7 +9,7 @@ import * as React from "react"
 import { useInterface } from "../context/InterfaceCtx"
 import { useWindowSize } from "../context/WindowSizeCtx"
 import PageContent from "../components/layout/PageContent"
-
+import Header from "./layout/Header"
 const Layout = ({ children }) => {
   const { width, height } = useWindowSize()
   // const {
@@ -22,6 +22,7 @@ const Layout = ({ children }) => {
   // } = useInterface()
   return (
     <>
+      <Header />
       <PageContent>{children}</PageContent>
     </>
   )

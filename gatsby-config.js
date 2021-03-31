@@ -51,13 +51,13 @@ const cfg = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-image`,
-    {
-      resolve: `gatsby-plugin-canonical-urls`,
-      options: {
-        siteUrl: `https://www.escmattresscenter.com`,
-        stripQueryString: true,
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-canonical-urls`,
+    //   options: {
+    //     siteUrl: `https://www.escmattresscenter.com`,
+    //     stripQueryString: true,
+    //   },
+    // },
     {
       resolve: `gatsby-source-shopify`,
       options: {
